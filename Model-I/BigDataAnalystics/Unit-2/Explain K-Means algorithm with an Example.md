@@ -1,154 +1,149 @@
-### **K-Means Algorithm – Explanation with Example (20 Marks Answer)**
+# 13.a) Explain K-Means Algorithm with an Example (20 Marks)
 
-#### **1. Introduction to K-Means Algorithm**
+## Introduction
 
-**K-Means** is one of the most popular clustering algorithms used in **Data Mining** and **Machine Learning**. It is an **unsupervised learning algorithm** that groups similar data points into clusters based on their features.
+**K-Means Clustering** is an **unsupervised machine learning algorithm** used to group similar data points into clusters. It partitions a dataset into **K number of clusters**, where each cluster is represented by its **centroid (mean value of points)**. 
 
-The main objective of the K-Means algorithm is to **divide a dataset into K distinct clusters**, where each data point belongs to the cluster with the nearest mean (centroid).
-
-K-Means helps in discovering hidden patterns in large datasets and is widely used in **Big Data Analytics**.
+The algorithm iteratively assigns data points to clusters based on distance and recalculates cluster centroids until the clusters become stable.
 
 ---
 
-### **2. Key Idea of K-Means**
+## Definition
 
-The algorithm works by:
-
-* Selecting **K cluster centers (centroids)**.
-* Assigning each data point to the nearest centroid.
-* Recalculating the centroid of each cluster.
-* Repeating the process until the centroids no longer change.
+K-Means clustering is a **partition-based clustering technique** that divides a dataset into **K mutually exclusive clusters** based on similarity between data points. 
 
 ---
 
-### **3. Steps in K-Means Algorithm**
+## K-Means Algorithm Steps
 
-1. **Choose the number of clusters (K)**
-   Decide how many clusters the dataset should be divided into.
+Given a dataset with **N data points** and **K clusters**, the algorithm works as follows:
 
-2. **Initialize Centroids**
-   Randomly select K data points as initial cluster centroids.
+1. **Choose K Centroids**
 
-3. **Assign Data Points to Clusters**
-   Each data point is assigned to the nearest centroid based on **distance (usually Euclidean distance)**.
+   * Randomly select K data points as initial centroids.
 
-4. **Update Centroids**
-   Calculate the new centroid of each cluster by taking the **mean of all data points in that cluster**.
+2. **Calculate Distance**
+
+   * Compute the distance between each data point and the centroids using a distance metric (usually Euclidean distance).
+
+3. **Assign Points to Clusters**
+
+   * Assign each data point to the cluster whose centroid is closest.
+
+4. **Recalculate Centroids**
+
+   * Compute the mean of all points in each cluster to obtain new centroids.
 
 5. **Repeat the Process**
-   Steps 3 and 4 are repeated until:
 
-   * Centroids do not change, or
-   * Maximum iterations are reached.
+   * Repeat steps 2–4 until centroids no longer change or clusters become stable.
+
+At this stage, the clustering process stops. 
 
 ---
 
-### **4. Mathematical Formula**
+## Example of K-Means Clustering
 
-The objective of K-Means is to **minimize the sum of squared distances between data points and their cluster centroid**.
+Suppose we have the following **data points**:
+
+| Point | Coordinates |
+| ----- | ----------- |
+| A1    | (2,10)      |
+| A2    | (2,6)       |
+| A3    | (11,11)     |
+| A4    | (6,9)       |
+| A5    | (6,4)       |
+
+Assume **K = 2 clusters**.
+
+### Step 1: Select Initial Centroids
+
+Example:
+
+C1 = (2,6)
+C2 = (6,9)
+
+---
+
+### Step 2: Calculate Distance
+
+Compute distance of each point from centroids.
+
+Example:
+
+Distance formula:
 
 [
-J = \sum_{i=1}^{k} \sum_{x \in C_i} ||x - \mu_i||^2
+d = \sqrt{(x2-x1)^2 + (y2-y1)^2}
 ]
 
-Where:
-
-* (k) = number of clusters
-* (C_i) = set of data points in cluster i
-* (\mu_i) = centroid of cluster i
-* (||x - \mu_i||^2) = distance between data point and centroid
+Each point is assigned to the nearest centroid.
 
 ---
 
-### **5. Example of K-Means Clustering**
+### Step 3: Assign Clusters
 
-Consider the following dataset representing **student scores**:
+After computing distances:
 
-| Student | Score |
-| ------- | ----- |
-| A       | 10    |
-| B       | 12    |
-| C       | 15    |
-| D       | 70    |
-| E       | 72    |
-| F       | 75    |
+Cluster 1 → points near centroid C1
+Cluster 2 → points near centroid C2
 
-Let **K = 2** (two clusters).
+---
 
-#### **Step 1: Initialize Centroids**
+### Step 4: Recalculate Centroids
 
-Assume initial centroids:
+New centroid = Mean of all points in cluster.
 
-* C1 = 10
-* C2 = 70
+Example:
 
-#### **Step 2: Assign Points to Nearest Centroid**
+Cluster1 points = (2,6), (6,4)
 
-Cluster 1:
-10, 12, 15
-
-Cluster 2:
-70, 72, 75
-
-#### **Step 3: Recalculate Centroids**
-
-New centroid for Cluster 1:
+New centroid =
 
 [
-(10 + 12 + 15) / 3 = 12.33
+(2+6)/2 , (6+4)/2 = (4,5)
 ]
 
-New centroid for Cluster 2:
+---
 
-[
-(70 + 72 + 75) / 3 = 72.33
-]
+### Step 5: Repeat
 
-#### **Step 4: Reassign Points**
-
-The clusters remain the same, so the algorithm **converges** and stops.
-
-Final Clusters:
-
-* **Cluster 1:** Low scores (10, 12, 15)
-* **Cluster 2:** High scores (70, 72, 75)
+Distances are recalculated and clusters updated until centroids stop changing.
 
 ---
 
-### **6. Applications of K-Means**
+## Applications of K-Means
 
-K-Means is widely used in many real-world applications:
+According to the PDF, major applications include:
 
-1. **Customer segmentation** in marketing
-2. **Image segmentation** in computer vision
-3. **Document clustering** in search engines
-4. **Fraud detection** in financial systems
-5. **Recommendation systems**
-
----
-
-### **7. Advantages of K-Means**
-
-* Simple and easy to implement
-* Efficient for large datasets
-* Fast convergence
-* Works well when clusters are clearly separated
+* Document classification
+* Customer segmentation
+* Image segmentation
+* Fraud detection in banking
+* Social media analysis 
 
 ---
 
-### **8. Limitations of K-Means**
+## Advantages
 
-* The value of **K must be chosen beforehand**
-* Sensitive to **initial centroid selection**
-* Not suitable for **non-spherical clusters**
-* Sensitive to **outliers and noise**
-
----
-
-### **9. Conclusion**
-
-The **K-Means algorithm** is a powerful clustering technique used in **Big Data Analytics** and **Machine Learning** for grouping similar data points. By iteratively updating cluster centroids and assigning data points based on distance, it efficiently organizes large datasets into meaningful clusters.
+* Easy to implement
+* Works with large datasets
+* Guaranteed convergence
+* Can be applied to many domains 
 
 ---
 
-If you want, I can also give a **simple diagram of K-Means clustering (which many teachers expect in a 20-mark answer)** so you can draw it easily in the exam.
+## Disadvantages
+
+* Need to decide number of clusters (K)
+* Sensitive to outliers
+* Depends on initial centroid selection
+* Not effective for high dimensional data 
+
+---
+
+## Conclusion
+
+K-Means clustering is a simple yet powerful unsupervised learning algorithm used to group similar data objects into clusters. It works iteratively by assigning data points to clusters and updating centroids until stable clusters are obtained.
+
+---
