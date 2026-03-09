@@ -1,10 +1,8 @@
-## **Building a Decision Tree using the CART algorithm for DATA WEATHER**
 
-The **CART (Classification and Regression Trees)** algorithm builds a **binary decision tree** using the **Gini Index** to find the best split. The goal is to divide the dataset into groups that are as pure as possible.
 
----
+# 14.a) Build Decision Tree using CART Algorithm (DATA WEATHER)
 
-# **1. Given Dataset**
+### Given Dataset
 
 | Day | Outlook  | Temperature | Humidity | Play |
 | --- | -------- | ----------- | -------- | ---- |
@@ -14,115 +12,84 @@ The **CART (Classification and Regression Trees)** algorithm builds a **binary d
 | D4  | Rain     | Mild        | High     | Yes  |
 | D5  | Rain     | Cool        | Normal   | Yes  |
 
-Target variable: **Play (Yes / No)**
+---
 
-Total records = **5**
+## Step 1: CART Algorithm Concept
 
-* Yes = **3**
-* No = **2**
+**CART (Classification and Regression Tree)** is a decision tree algorithm that uses **binary splits** and the **Gini Index** to select the best attribute. 
+
+Gini Index Formula:
+
+[
+Gini = 1 - \sum (p_i)^2
+]
+
+Where
+(p_i) = probability of class i
+
+The attribute with the **minimum Gini value** is chosen as the root node.
 
 ---
 
-# **2. Calculate Initial Gini Index**
+## Step 2: Choose Root Node
 
-[
-Gini = 1 - (P_{Yes}^2 + P_{No}^2)
-]
+From calculations (similar to PDF method), **Outlook** generally gives the minimum impurity.
 
-[
-P_{Yes} = 3/5
-]
+Therefore:
 
-[
-P_{No} = 2/5
-]
-
-[
-Gini = 1 - ( (3/5)^2 + (2/5)^2 )
-]
-
-[
-Gini = 1 - (9/25 + 4/25)
-]
-
-[
-Gini = 1 - 13/25 = 12/25 = 0.48
-]
+**Root Node = Outlook**
 
 ---
 
-# **3. Choose Best Attribute for Root Node**
+## Step 3: Split Dataset
 
-We evaluate splits using **Gini Impurity**.
+### Case 1: Outlook = Overcast
 
-### **Split on Outlook**
+| Day | Play |
+| --- | ---- |
+| D3  | Yes  |
 
-Groups:
-
-**Sunny**
-
-D1, D2 → No, No
-Gini = 0 (pure)
-
-**Overcast + Rain**
-
-D3, D4, D5 → Yes, Yes, Yes
-Gini = 0 (pure)
-
-Since both groups are **pure**, this is the **best split**.
+Pure node → Leaf = **Yes**
 
 ---
 
-# **4. Construct Decision Tree**
+### Case 2: Outlook = Sunny
 
-Using the **CART algorithm**, we create a **binary split**.
+| Day | Play |
+| --- | ---- |
+| D1  | No   |
+| D2  | No   |
+
+Leaf = **No**
+
+---
+
+### Case 3: Outlook = Rain
+
+| Day | Play |
+| --- | ---- |
+| D4  | Yes  |
+| D5  | Yes  |
+
+Leaf = **Yes**
+
+---
+
+## Final Decision Tree
 
 ```
             Outlook
-           /       \
-       Sunny     Overcast/Rain
-        |             |
-       Play=No      Play=Yes
+          /    |     \
+       Sunny Overcast Rain
+        No      Yes     Yes
 ```
 
 ---
 
-# **5. Final Decision Rules**
+## Decision Rules
 
-From the tree we get:
-
-**Rule 1**
-
-If Outlook = Sunny
-→ Play = No
-
-**Rule 2**
-
-If Outlook = Overcast or Rain
-→ Play = Yes
+1. If Outlook = Sunny → Play = No
+2. If Outlook = Overcast → Play = Yes
+3. If Outlook = Rain → Play = Yes
 
 ---
-
-# **6. Final CART Decision Tree**
-
-```
-             [Outlook]
-            /         \
-        Sunny      Overcast/Rain
-         (No)          (Yes)
-```
-
----
-
-# **7. Conclusion**
-
-Using the **CART algorithm**, the dataset is split based on the **Outlook attribute**, producing a simple binary decision tree. The algorithm uses the **Gini Index** to select the best split and continues until pure leaf nodes are obtained.
-
----
-
-✅ **Tip for exams:**
-After drawing the tree, **always write the decision rules**. This helps secure **full marks in a 20-mark Big Data Analytics question.**
-
----
-
-If you want, I can also show **the full step-by-step Gini calculations for Temperature and Humidity splits** (teachers sometimes expect that for 20-mark answers).
